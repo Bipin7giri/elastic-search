@@ -10,11 +10,13 @@ router.post("/products", async (req, res) => {
     const product = new Product(req.body);
     await product.save();
 
-    const { _id, restBody } = product;
+    const { _id, ...restBody } = product;
+  
+    restBody.id = _id
     // Sync with Elasticsearch
     elasticsearchClient.index({
       index: "products",
-      body: req.body,
+      body: restBody,
     });
 
     res.json(product);

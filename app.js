@@ -2,8 +2,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-
-mongoose.connect('mongodb+srv://bipin7giri:IRLouttbnPzptFnk@cluster0.2d9ffmd.mongodb.net/elastic_search', { useNewUrlParser: true, useUnifiedTopology: true });
+const dotenv = require('dotenv').config(); // Load environment variables from .env
+const DATABASE_URL = process.env.DATABASE_URL;
+mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(express.json());
 
